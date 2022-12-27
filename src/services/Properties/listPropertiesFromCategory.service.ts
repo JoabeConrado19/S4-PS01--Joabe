@@ -44,9 +44,7 @@ const listPropertiesFromCategoriesService = async (id:string) => {
         stripUnknown: true
       })
     
-      if(properties.length === 0){
-        throw new AppError("Not found", 404)
-      }
+      
       return properties
 
     

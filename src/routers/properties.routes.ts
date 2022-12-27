@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createPropertieController } from "../controllers/properties.controllers";
+import { createPropertieController, listPropertiesController } from "../controllers/properties.controllers";
 import PropertieExists from "../middlewares/properties/propertiesExists.middlewares";
 import propertieUuidVerify from "../middlewares/properties/propertieUuidVerify.middleware";
 import onlyAdmVerify from "../middlewares/usersMiddlewares/onlyAdm.middleware";
@@ -10,6 +10,7 @@ import { createPropertiesSerializer } from "../serializers/properties.serializer
 
 const propertiesRoutes = Router()
 propertiesRoutes.post('',validateDataMiddleware(createPropertiesSerializer), onlyAdmVerify, propertieUuidVerify, PropertieExists, createPropertieController)
+propertiesRoutes.get('', listPropertiesController)
 
 
 

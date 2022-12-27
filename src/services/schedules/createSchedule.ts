@@ -15,7 +15,7 @@ const createScheduleService = async (userData: IScheduleRequest) => {
     await scheduleRepository.save(schedule)
 
 
-    return schedule
+    return {"message": `Agendado para o dia ${userData.date}, as ${userData.hour}`}
 
 
 }
