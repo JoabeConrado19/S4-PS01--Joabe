@@ -1,9 +1,9 @@
 import { compare } from "bcryptjs";
 import jwt from "jsonwebtoken";
-import AppDataSource from "../data-source";
-import { User } from "../entities/user.entity";
+import AppDataSource from "../../data-source";
+import { User } from "../../entities/user.entity";
 import { Request, Response, NextFunction } from "express";
-import AppError from "../errors/AppError";
+import AppError from "../../errors/AppError";
 
 
 const loginVerify = async (req: Request, res: Response, next: NextFunction) => {
@@ -23,11 +23,17 @@ const loginVerify = async (req: Request, res: Response, next: NextFunction) => {
     throw new AppError("Email or password invalid", 403)
   }
 
+  
   const token = jwt.sign(
     { email, isAdm: user.isAdm },
     "SECRET_KEY",
     { expiresIn: "24h", subject: user.id }
-  )
+    )
+    
+    if(user.isActive === false){
+      throw new AppError("User Inactive", 400)
+    }
+    
 
   return next()
 }

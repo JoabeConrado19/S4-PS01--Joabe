@@ -1,7 +1,7 @@
-import AppDataSource from "../data-source";
-import { User } from "../entities/user.entity"
+import AppDataSource from "../../data-source";
+import { User } from "../../entities/user.entity"
 import { Request, Response, NextFunction } from "express";
-import AppError from "../errors/AppError";
+import AppError from "../../errors/AppError";
 
 const findUser = async (req: Request, res: Response, next: NextFunction) => {
   const id = req.params.id

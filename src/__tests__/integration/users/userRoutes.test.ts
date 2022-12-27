@@ -42,7 +42,7 @@ describe("/users", () => {
         const response = await request(app).post('/users').send(mockedUser)
 
         expect(response.body).toHaveProperty("message")
-        expect(response.status).toBe(400)
+        expect(response.status).toBe(409)
              
     })
 
@@ -52,6 +52,7 @@ describe("/users", () => {
         const response = await request(app).get('/users').set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
 
         expect(response.body).toHaveLength(2)
+        expect(response.body[0]).not.toHaveProperty("password")
      
     })
 
@@ -120,7 +121,7 @@ describe("/users", () => {
      
     })
 
-    test("DELETE -  should not be able to delete user with invalid id",async () => {
+    test("DELETE /users/:id -  should not be able to delete user with invalid id",async () => {
         await request(app).post('/users').send(mockedAdmin)
 
         const adminLoginResponse = await request(app).post("/login").send(mockedAdminLogin);

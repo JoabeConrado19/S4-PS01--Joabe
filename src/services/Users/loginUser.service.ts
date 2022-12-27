@@ -1,7 +1,7 @@
 import { compare } from "bcryptjs";
 import jwt from "jsonwebtoken";
-import AppDataSource from "../data-source";
-import { User } from "../entities/user.entity";
+import AppDataSource from "../../data-source";
+import { User } from "../../entities/user.entity";
 
 const loginUserService = async (email: string, password: string) => {
   const userRepository = AppDataSource.getRepository(User)

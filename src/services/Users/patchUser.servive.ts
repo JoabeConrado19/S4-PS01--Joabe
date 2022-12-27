@@ -1,8 +1,8 @@
-import AppDataSource from "../data-source";
-import { User } from "../entities/user.entity";
-import AppError from "../errors/AppError";
-import { IUserUpdate } from "../interfaces/users";
-import { UserReturnSerializer, UserUniqueReturnSerializer } from "../serializers/users.serializers";
+import AppDataSource from "../../data-source";
+import { User } from "../../entities/user.entity";
+import AppError from "../../errors/AppError";
+import { IUserUpdate } from "../../interfaces/users";
+import { UserReturnSerializer, UserUniqueReturnSerializer } from "../../serializers/users.serializers";
 
 const patchUserService = async (id: string, userData: IUserUpdate) => {
   const userRepository = AppDataSource.getRepository(User)

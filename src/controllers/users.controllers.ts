@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { Any } from "typeorm";
 import { IUserRequest, IUserUpdate } from "../interfaces/users";
-import createUserService from "../services/createUser.service";
-import deleteUserService from "../services/deleteUser.servive";
-import listUsersService from "../services/listUsers.service";
-import loginUserService from "../services/loginUser.service";
-import patchUserService from "../services/patchUser.servive";
-import retrieveUserService from "../services/retrieveUser.service";
+import createUserService from "../services/Users/createUser.service";
+import deleteUserService from "../services/Users/deleteUser.servive";
+import listUsersService from "../services/Users/listUsers.service";
+import loginUserService from "../services/Users/loginUser.service";
+import patchUserService from "../services/Users/patchUser.servive";
+import retrieveUserService from "../services/Users/retrieveUser.service";
 
 
 const createUserController = async (req: Request, res: Response) => {

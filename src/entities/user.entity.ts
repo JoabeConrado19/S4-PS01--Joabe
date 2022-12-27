@@ -1,5 +1,6 @@
 import { getRounds, hashSync } from "bcryptjs";
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, SaveOptions, BeforeUpdate } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, SaveOptions, BeforeUpdate, ManyToOne, OneToMany } from "typeorm";
+import { SchedulesUsersProperties } from "./schedules_users_properties.entity";
 
 @Entity('users_database')
 class User {
@@ -27,6 +28,7 @@ class User {
 
     @UpdateDateColumn({ nullable: true })
     updatedAt: Date
+    schedulesUsersProperties: any;
 
     @BeforeUpdate()
     @BeforeInsert()
@@ -36,6 +38,9 @@ class User {
             this.password = hashSync(this.password, 10)
         }
     }
+
+    @OneToMany(() => SchedulesUsersProperties, (schedulesUsersProperties) => schedulesUsersProperties.user)
+    user: User
 
 }
 

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import AppError from "../errors/AppError";
+import AppError from "../../errors/AppError";
 
 const uuidVerify = (req: Request, res: Response, next: NextFunction) => {
   const id = req.params.id

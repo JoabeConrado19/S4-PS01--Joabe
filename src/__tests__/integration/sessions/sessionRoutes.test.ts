@@ -41,4 +41,16 @@ describe("/login", () => {
              
     })
 
+    test("POST /login -  should not be able to login with the user with isActive = false",async () => {
+        const adminLoginResponse = await request(app).post("/login").send(mockedAdminLogin);
+        const findUser= await request(app).get('/users').set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
+        await request(app).delete(`/users/${findUser.body[0].id}`).set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
+        const response = await request(app).post("/login").send(mockedAdminLogin);
+        expect(response.body).toHaveProperty("message")
+        expect(response.status).toBe(400)
+             
+    })
+
+   
+
 })

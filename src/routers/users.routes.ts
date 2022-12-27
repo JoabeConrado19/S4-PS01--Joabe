@@ -1,13 +1,13 @@
 import { Router } from "express";
 import { createUserController, deleteUsersController, listUsersController, patchUsersController, retrieveUsersController } from "../controllers/users.controllers";
-import admAndUserVerify from "../middlewares/admAndUser.middleware";
-import findUser from "../middlewares/findUser.middleware";
-import onlyAdmVerify from "../middlewares/onlyAdm.middleware";
-import userExists from "../middlewares/userExists.middleware";
+import admAndUserVerify from "../middlewares/usersMiddlewares/admAndUser.middleware";
+import findUser from "../middlewares/usersMiddlewares/findUser.middleware";
+import onlyAdmVerify from "../middlewares/usersMiddlewares/onlyAdm.middleware";
+import userExists from "../middlewares/usersMiddlewares/userExists.middleware";
 
-import uuidVerify from "../middlewares/UuidVerify.middleware";
-import validateDataMiddleware from "../middlewares/validatedData.middleware";
-import bodyEditVerify from "../middlewares/verifyEditBody.middleware";
+import uuidVerify from "../middlewares/usersMiddlewares/UuidVerify.middleware";
+import validateDataMiddleware from "../middlewares/usersMiddlewares/validatedData.middleware";
+import bodyEditVerify from "../middlewares/usersMiddlewares/verifyEditBody.middleware";
 import { createUserSerializer, updateUserSerializer } from "../serializers/users.serializers";
 
 
