@@ -1,47 +1,56 @@
 import { getRounds, hashSync } from "bcryptjs";
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, SaveOptions, BeforeUpdate, ManyToOne, OneToMany } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  BeforeInsert,
+  BeforeUpdate,
+  OneToMany,
+} from "typeorm";
 import { SchedulesUsersProperties } from "./schedules_users_properties.entity";
 
-@Entity('users_database')
+@Entity("users_database")
 class User {
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-    @PrimaryGeneratedColumn('uuid')
-    id: string
+  @Column()
+  name: string;
 
-    @Column()
-    name: string
+  @Column()
+  password: string;
 
-    @Column()
-    password: string
+  @Column({ unique: true })
+  email: string;
 
-    @Column({ unique: true })
-    email: string
+  @Column()
+  isAdm: boolean;
 
-    @Column()
-    isAdm: boolean
+  @Column({ default: true, nullable: true })
+  isActive: boolean;
 
-    @Column({ default: true, nullable: true })
-    isActive: boolean
+  @CreateDateColumn({ nullable: true })
+  createdAt: Date;
 
-    @CreateDateColumn({ nullable: true })
-    createdAt: Date
+  @UpdateDateColumn({ nullable: true })
+  updatedAt: Date;
 
-    @UpdateDateColumn({ nullable: true })
-    updatedAt: Date
-    schedulesUsersProperties: any;
-
-    @BeforeUpdate()
-    @BeforeInsert()
-    hashPassword() {
-        const isEncrypted = getRounds(this.password)
-        if (!isEncrypted) {
-            this.password = hashSync(this.password, 10)
-        }
+  @BeforeUpdate()
+  @BeforeInsert()
+  hashPassword() {
+    const isEncrypted = getRounds(this.password);
+    if (!isEncrypted) {
+      this.password = hashSync(this.password, 10);
     }
+  }
 
-    @OneToMany(() => SchedulesUsersProperties, (schedulesUsersProperties) => schedulesUsersProperties.user)
-    user: User
-
+  @OneToMany(
+    () => SchedulesUsersProperties,
+    (schedulesUsersProperties) => schedulesUsersProperties.user
+  )
+  schedulesUsersProperties: SchedulesUsersProperties[];
 }
 
-export { User }
+export { User };

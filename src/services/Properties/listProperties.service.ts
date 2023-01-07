@@ -1,21 +1,11 @@
-import AppDataSource from "../../data-source"
-import { Properties } from "../../entities/properties.entity"
-import { listPropertiesReturnedData } from "../../serializers/properties.serializers"
-
-
+import AppDataSource from "../../data-source";
+import { Properties } from "../../entities/properties.entity";
 
 const listPropertiesService = async () => {
-    const propertiesRepository = AppDataSource.getRepository(Properties)
+  const propertiesRepository = AppDataSource.getRepository(Properties);
+  const properties = await propertiesRepository.find();
 
-    const categories = await propertiesRepository.find()
+  return properties;
+};
 
-    const returnedPropertie: any = await listPropertiesReturnedData.validate(categories, {
-        stripUnknown: true
-      })
-    
-      return returnedPropertie
-
-    
-}
-
-export default listPropertiesService
+export default listPropertiesService;

@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { createUserController, deleteUsersController, listUsersController, patchUsersController, retrieveUsersController } from "../controllers/users.controllers";
-import admAndUserVerify from "../middlewares/usersMiddlewares/admAndUser.middleware";
 import findUser from "../middlewares/usersMiddlewares/findUser.middleware";
 import onlyAdmVerify from "../middlewares/usersMiddlewares/onlyAdm.middleware";
 import userExists from "../middlewares/usersMiddlewares/userExists.middleware";
@@ -15,7 +14,7 @@ const userRoutes = Router()
 userRoutes.post('',validateDataMiddleware(createUserSerializer),userExists, createUserController)
 userRoutes.get('', onlyAdmVerify, listUsersController)
 userRoutes.get('/:id',uuidVerify, findUser, retrieveUsersController)
-userRoutes.patch('/:id',uuidVerify, findUser, admAndUserVerify,validateDataMiddleware(updateUserSerializer),bodyEditVerify ,patchUsersController)
+userRoutes.patch('/:id', uuidVerify, findUser,validateDataMiddleware(updateUserSerializer),bodyEditVerify ,patchUsersController)
 userRoutes.delete('/:id',uuidVerify, findUser, onlyAdmVerify, deleteUsersController)
 
 export default userRoutes

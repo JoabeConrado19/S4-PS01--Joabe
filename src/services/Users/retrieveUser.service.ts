@@ -1,16 +1,14 @@
-import { IUserRequest, IUserUpdate } from "../../interfaces/users"
-import AppDataSource from "../../data-source"
-import { User } from "../../entities/user.entity"
-import AppError from "../../errors/AppError"
+import { IUserRequest, IUserUpdate } from "../../interfaces/users";
+import AppDataSource from "../../data-source";
+import { User } from "../../entities/user.entity";
 
 const retrieveUserService = async (id: string) => {
-  const userRepository = AppDataSource.getRepository(User)
+  const userRepository = AppDataSource.getRepository(User);
   const user = userRepository.findOne({
-    where: { id }
+    where: { id },
   });
 
-  return [204, user]
+  return [204, user];
+};
 
-}
-
-export default retrieveUserService
+export default retrieveUserService;

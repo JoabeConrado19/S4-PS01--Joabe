@@ -1,19 +1,23 @@
-import * as yup from 'yup'
+import * as yup from "yup";
 
 const createCategorySerializer = yup.object().shape({
-    name: yup.string().required()
-})
+  name: yup.string().required(),
+});
 
 const CategoryReturnSerializer = yup.object().shape({
-    name: yup.string()
-})
+  name: yup.string(),
+});
 
 const CategoryUniqueReturnSerializer = yup.object().shape({
-    name: yup.string(),
-    id: yup.string()
+  name: yup.string(),
+  id: yup.string(),
+});
 
-})
+const listCategoriesReturnedData = yup.array(CategoryUniqueReturnSerializer);
 
-const listCategoriesReturnedData = yup.array(CategoryUniqueReturnSerializer)
-
-export { createCategorySerializer, CategoryReturnSerializer, CategoryUniqueReturnSerializer, listCategoriesReturnedData }
+export {
+  createCategorySerializer,
+  CategoryReturnSerializer,
+  CategoryUniqueReturnSerializer,
+  listCategoriesReturnedData,
+};

@@ -1,21 +1,19 @@
-import AppDataSource from "../../data-source"
-import { Categories } from "../../entities/category.entity"
-import { User } from "../../entities/user.entity"
-import { listCategoriesReturnedData } from "../../serializers/category.serializers"
-import { listUsersReturnedData } from "../../serializers/users.serializers"
+import AppDataSource from "../../data-source";
+import { Categories } from "../../entities/category.entity";
+import { listCategoriesReturnedData } from "../../serializers/category.serializers";
 
 const listCategoriesService = async () => {
-    const categoryRepository = AppDataSource.getRepository(Categories)
+  const categoryRepository = AppDataSource.getRepository(Categories);
 
-    const categories = await categoryRepository.find()
+  const categories = await categoryRepository.find();
+  const returnedUser: any = await listCategoriesReturnedData.validate(
+    categories,
+    {
+      stripUnknown: true,
+    }
+  );
 
-    const returnedUser: any = await listCategoriesReturnedData.validate(categories, {
-        stripUnknown: true
-      })
-    
-      return returnedUser
+  return returnedUser;
+};
 
-    
-}
-
-export default listCategoriesService
+export default listCategoriesService;

@@ -1,19 +1,17 @@
-import AppDataSource from "../../data-source"
-import { User } from "../../entities/user.entity"
-import { listUsersReturnedData } from "../../serializers/users.serializers"
+import AppDataSource from "../../data-source";
+import { User } from "../../entities/user.entity";
+import { listUsersReturnedData } from "../../serializers/users.serializers";
 
 const listUsersService = async () => {
-    const userRepository = AppDataSource.getRepository(User)
+  const userRepository = AppDataSource.getRepository(User);
 
-    const users = await userRepository.find()
+  const users = await userRepository.find();
 
-    const returnedUser: any = await listUsersReturnedData.validate(users, {
-        stripUnknown: true
-      })
-    
-      return returnedUser
+  const returnedUser: any = await listUsersReturnedData.validate(users, {
+    stripUnknown: true,
+  });
 
-    return users
-}
+  return returnedUser;
+};
 
-export default listUsersService
+export default listUsersService;

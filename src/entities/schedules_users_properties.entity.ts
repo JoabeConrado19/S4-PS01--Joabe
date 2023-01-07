@@ -1,30 +1,27 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToOne, JoinColumn, Timestamp } from "typeorm";
-import { Adresses } from "./adresses.entity";
-import { Categories } from "./category.entity";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { Properties } from "./properties.entity";
 import { User } from "./user.entity";
 
-@Entity('schedules_users_properties_database')
+@Entity("schedules_users_properties_database")
 class SchedulesUsersProperties {
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-    @PrimaryGeneratedColumn('uuid')
-    id: string
+  @Column()
+  date: string;
 
-    @Column()
-    date: Date
+  @Column()
+  hour: string;
 
-    @Column()
-    hour: Date
+  @ManyToOne(
+    () => Properties,
+    (schedulesUsersProperties) => schedulesUsersProperties.schedules,
+    { eager: true }
+  )
+  property: Properties;
 
-    @ManyToOne(() => Properties,schedulesUsersProperties => schedulesUsersProperties.properties)
-    properties: SchedulesUsersProperties
-    schedulesUsersProperties: any;
-
-    @ManyToOne(() => User, user => user.schedulesUsersProperties)
-    user: User
-    
+  @ManyToOne(() => User, (user) => user.schedulesUsersProperties)
+  user: User;
 }
 
-
-
-export { SchedulesUsersProperties }
+export { SchedulesUsersProperties };
